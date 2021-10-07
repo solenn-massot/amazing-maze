@@ -1,7 +1,15 @@
-# amazing-maze
-Génération et résolution de labyrinthes
+# amazing-maze génération et résolution de labyrinthes par differents algorithme
 
-###  Une branche / personne puis on rassemblera tous quand il y auras des avancées 
+ ### Algortihme mise en place 
+ - Backtracking
+ - Kruskal 
+
+### Backtracking
+
+![Capture d’écran de 2021-10-07 12-59-36](https://user-images.githubusercontent.com/71874403/136371824-f79476d0-44d1-4a43-8f79-bd3efedb71ec.png)
+
+
+### Kruskal
 
 
 
