@@ -1,4 +1,4 @@
-# amazing-maze génération et résolution de labyrinthes
+# Amazing-maze génération et résolution de labyrinthes
 
  ### Algortihme mise en place 
  - Backtracking
