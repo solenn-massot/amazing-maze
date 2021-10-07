@@ -11,5 +11,4 @@
 
 ### Kruskal
 
-
-
+![Capture d’écran de 2021-10-07 12-56-20](https://user-images.githubusercontent.com/71874403/136371978-ef302dd8-79bd-485e-be22-c1f1cdcfacf8.png)
