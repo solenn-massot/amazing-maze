@@ -34,9 +34,10 @@ class MazeBacktracking():
 
     def backtrackingRecursive(self, x ,y):                         # --- --- FUNCTION RECURSIVE
         
-        # pour voir l'avancée de l'algo dans la matrice
-        print(self.grid) 
-        input("continue")
+        print(self.grid)                                            # --- ZONE DE TEST --- #
+                                                                    # pour voir l'avancée de l'algo dans la matrice                                            
+        input("continue")                                           # --- ZONE DE TEST --- #
+                                                  
                 
         self.grid[x][y] = 1                                        # --- change x , y par 1 pour dire qu'il a était visitée
         
