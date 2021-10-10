@@ -78,7 +78,7 @@ class MazeKruskal():
         path = []
         # STEP 1 GET RANDOM CASE
         allEdges = self.randomizeEdges()
-        for edge in allEdges:
+        for edge in allEdges:                                               # --- PROBLEM WITH LOOP BAD LOOP
 
             # STEP 2 TAKE A NEIGHBORS et on random
             neighbors = self.selectNeighborsViaPos(edge[0], edge[1])
@@ -93,6 +93,6 @@ class MazeKruskal():
                 print(self.grid)
                 input("continue ? ")
 
-        print(path)
+        print(path) 
 
 MazeKruskal()
