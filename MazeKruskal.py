@@ -79,7 +79,7 @@ class MazeKruskal():
         # print(path)
         return path
     
-    def mazeInString(self, edgeOne, edgeTwo):                                 # --- --- FUNCTION print a maze in string     
+    def mazeInString(self, edgeOne, edgeTwo):               # --- --- FUNCTION make a maze in matrice     
         if edgeOne[0] == edgeTwo[0]:
             if edgeTwo[1] == 0 or edgeOne[1] == 0:
                 middleEdge = 1
@@ -104,15 +104,21 @@ class MazeKruskal():
         self.maze[edgeOne[0]*2][edgeOne[1]*2] = 1
         self.maze[edgeTwo[0]*2][edgeTwo[1]*2] = 1
 
-    def printMaze(self):
+    def printMaze(self):                                    # --- --- FUNCTION make a maze in string
         maze = ''
+        wall = "#"
+        path = "."
+        br = "\n"
+        maze += wall + path + (wall * len(self.maze)) + br
         for x in range(len(self.maze)):
+            maze += wall
             for y in range(len(self.maze)):
                 if self.maze[x][y] == 0:
-                    maze += "#"
+                    maze += wall
                 else:
-                    maze += "."
-            maze += "\n"
+                    maze += path
+            maze += wall + br
+        maze += wall * len(self.maze) + path + wall
         return maze
     
     
