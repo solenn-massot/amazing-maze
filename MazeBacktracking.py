@@ -2,12 +2,13 @@ import random
 import numpy as np
 
 class MazeBacktracking():
-    def __init__(self):                                           # --- --- CONSTRUCTEUR
-        
-        self.size = int(input("choose a number : "))              # --- user give Size  
-        self.direction = [ [-1, 0], [1, 0], [0, -1], [0, 1] ]     # --- Nord Sud Ouest Est 
-        self.grid = np.zeros((self.size, self.size), dtype=int)   # --- Creation matrice de 0  
-        self.generate = self.backtrackingRecursive(0, 0)          # --- Generate backtracking recursive     
+    def __init__(self):                                            # --- --- CONSTRUCTEUR ATTR(size) : maze (direction) : NORD SUD OEUST EST (grid): matrice 
+        self.temp = []
+        self.size = int(input("choose a number : "))                    # --- user give Size  
+        self.direction = [ [-1, 0], [1, 0], [0, -1], [0, 1] ]           # --- Nord Sud Ouest Est 
+        self.grid = np.zeros((self.size, self.size), dtype=int)         # --- Creation matrice de 0
+        self.maze = np.zeros((self.size*2-1, self.size*2-1), dtype=int) # --- Matrice de modelisation du maze
+        self.generate = self.backtrackingRecursive(0, 0)                # --- Generate backtracking recursive     
 
     def isWall(self, x , y):                                       # --- --- FUNCTION RETURNE param (x , y) VERIFIE LIMITE MATRICE  
         
@@ -34,23 +35,25 @@ class MazeBacktracking():
 
     def backtrackingRecursive(self, x ,y):                         # --- --- FUNCTION RECURSIVE
         
-        print(self.grid)                                            # --- ZONE DE TEST --- #
-                                                                    # pour voir l'avancée de l'algo dans la matrice                                            
-        input("continue")                                           # --- ZONE DE TEST --- #
+        print(self.grid)                                           # --- ZONE DE TEST --- #
+                                                                   # --- pour voir l'avancée de l'algo dans la matrice                                            
+        input("continue")                                          # --- ZONE DE TEST --- #
                                                   
-                
         self.grid[x][y] = 1                                        # --- change x , y par 1 pour dire qu'il a était visitée
+        self.mazeInString(x, y)
         
         posRandom = self.shuffleDirection(x, y)                    # --- appel de ma fonction de melange de mes voisins veriffiée
-        
         for pos in posRandom:                                      # --- Boucle sur mes voisins verifiée
-                        
             self.backtrackingRecursive(pos[0],pos[1])              # --- Rappel recursiv avec un voisins a chaques fois
-                                                            
             #print(pos)                                            # --- En dépillant il retourne des nouvelles cellules inconnues 
-        
         # print(x, y)
         return x , y                                               # --- RETURNE POSITION DÉPART
             
-
-MazeBacktracking()
+    def mazeInString(self, x, y):
+        self.temp.append((x, y))
+        if len(self.temp) > 1:
+            print(self.temp)
+            self.temp.clear()
+    
+    
+M1 = MazeBacktracking()

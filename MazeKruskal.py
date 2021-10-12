@@ -106,8 +106,8 @@ class MazeKruskal():
 
     def printMaze(self):                                    # --- --- FUNCTION make a maze in string
         maze = ''
-        wall = "#"
-        path = "."
+        wall = "##"
+        path = ".."
         br = "\n"
         maze += wall + path + (wall * len(self.maze)) + br
         for x in range(len(self.maze)):
