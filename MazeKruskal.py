@@ -4,11 +4,12 @@ import numpy as np
 class MazeKruskal():
     def __init__(self):                                     # --- --- CONSTRUCTEUR attribut : size maze , direction, matrice, edge, generateMaze
         
-        self.size = int(input('choose a number : '))              # --- User give Size  
-        self.direction = [ [-1, 0], [1, 0], [0, -1], [0, 1] ]     # --- Nord Sud Ouest Est
-        self.grid = np.zeros((self.size, self.size), dtype=int)   # --- Creation matrice de 0
-        self.edge =  self.setIdMatrix()                           # --- get edge via ID
-        self.maze = self.generateKruskalMaze()                    # --- Generate backtracking recursive
+        self.size = int(input('choose a number : '))                    # --- User give Size  
+        self.direction = [ [-1, 0], [1, 0], [0, -1], [0, 1] ]           # --- Nord Sud Ouest Est
+        self.grid = np.zeros((self.size, self.size), dtype=int)         # --- Creation matrice de 0
+        self.maze = np.zeros((self.size*2-1, self.size*2-1), dtype=int) # --- Matrice de modelisation du maze
+        self.edge =  self.setIdMatrix()                                 # --- Rentrer edge via ID
+        self.path = self.generateKruskalMaze()                          # --- Generate backtracking recursive
         
     def isLimit(self, x , y):                               # --- --- FUNCTION RETURNE param (x , y) VERIFIE LIMITE MATRICE  
 
@@ -18,6 +19,10 @@ class MazeKruskal():
     
     def setIds(self, edge, edgePop):                        # --- --- FUNCTION set ID with param edge une postion edgePop position voisine
         self.grid[self.grid == self.grid[edgePop[0]][edgePop[1]]] = self.grid[edge[0]][edge[1]]                    
+        # print("position one two")
+        # print(edge, edgePop)
+        # print("id one two")
+        # print(self.grid[edge[0]][edge[1]], self.grid[edgePop[0]][edgePop[1]])
                     
     def setIdMatrix(self):                                  # --- --- FUNCTION set ID on all grid 
 
@@ -64,32 +69,53 @@ class MazeKruskal():
                     break
 
                 if self.checkIdViaPos(edge, neighbors[i]):              # STEP 3 CHECK NEIGHBORS and edge id's
-                
-                    path.append(edge)                                   # STEP 4 Finally SAVE PATH
-                    path.append(neighbors[i])                           # STEP 4 Finally SAVE PATH
+                    # print(edge)
+                    # print(neighbors[i])
+                    path.append((edge, neighbors[i]))                   # STEP 4 Finally SAVE PATH
                     self.setIds(edge, neighbors[i])                     # STEP 5 UPDATE ID NEIGHBORS WITH ID CASE
-                     
-                    print(self.grid)                                    # pour mieux comprendre print
-                    input("continue ? ")                                # step by step regardez les differentes action de lm'algorithme
-        print(path)
+                    self.mazeInString(edge, neighbors[i])
+                    # print(self.grid)                                    # pour mieux comprendre print            
+                    # input("continue ? ")                                # step by step regardez les differentes action de lm'algorithme
+        # print(path)
         return path
     
-    def mazeInString(self):                                 # --- --- FUNCTION print a maze in string
-        i = 0
-        Maze = ''
-        for x in range(len(self.grid)):
-            for y in range(len(self.grid)):
-                for i in range(len(self.maze)):
+    def mazeInString(self, edgeOne, edgeTwo):                                 # --- --- FUNCTION print a maze in string     
+        if edgeOne[0] == edgeTwo[0]:
+            if edgeTwo[1] == 0 or edgeOne[1] == 0:
+                middleEdge = 1
                 
-                    if x == self.maze[i][0] and y == self.maze[i][1]:
-                        Maze += "."    
-                    else:
-                        Maze += "#"
-                    i += 1
-            Maze += "\n"
-        return Maze
+            elif edgeOne[1] < edgeTwo[1]:
+                middleEdge = (edgeTwo[1]*2) -1 
+                
+            else:
+                middleEdge = (edgeOne[1]*2)-1
+            self.maze[edgeOne[0]*2][middleEdge] = 1    
+            
+        else:
+            if edgeTwo[0] == 0 or edgeOne[0] == 0:
+                middleEdge = 1
+                
+            elif edgeOne[0] < edgeTwo[0]:
+                middleEdge = (edgeTwo[0]*2) -1 
+                
+            else:
+                middleEdge = (edgeOne[0]*2)-1
+            self.maze[middleEdge][edgeOne[1]*2] = 1    
+        self.maze[edgeOne[0]*2][edgeOne[1]*2] = 1
+        self.maze[edgeTwo[0]*2][edgeTwo[1]*2] = 1
 
+    def printMaze(self):
+        maze = ''
+        for x in range(len(self.maze)):
+            for y in range(len(self.maze)):
+                if self.maze[x][y] == 0:
+                    maze += "#"
+                else:
+                    maze += "."
+            maze += "\n"
+        return maze
+    
     
 M1 = MazeKruskal()
-maze = M1.mazeInString()
+maze = M1.printMaze()
 print(maze)
