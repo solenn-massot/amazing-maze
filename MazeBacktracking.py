@@ -1,14 +1,20 @@
 import random
 import numpy as np
 
+"""
+Class MazeBacktracking
+genere un labyrinthe avec l'algorithme backtracking
+"""
 class MazeBacktracking():
-    def __init__(self):                                                 # --- --- CONSTRUCTEUR ATTR(size) : maze (direction) : NORD SUD OEUST EST (grid): matrice 
+    def __init__(self):                                            # --- --- CONSTRUCTEUR ATTR(size) : maze (direction) : NORD SUD OEUST EST (grid): matrice 
         self.size = int(input("choose a number : "))                    # --- user give Size  
         self.direction = [ [-1, 0], [1, 0], [0, -1], [0, 1] ]           # --- Nord Sud Ouest Est 
         self.grid = np.zeros((self.size, self.size), dtype=int)         # --- Creation matrice de 0
         self.mazeSize = self.size // 2 *2 +1                            # --- Matrice de modelisation du maze
         self.ver = [["#.."] * self.size + ['#'] for _ in range(self.size)] + [[]]
         self.hor = [["###"] * self.size + ['#'] for _ in range(self.size + 1)]
+        self.hor[0][0] = '#..'
+        self.hor[-1][-2] = '#..'
         self.generate = self.backtrackingRecursive(0, 0)                # --- Generate backtracking recursive
 
     def isWall(self, x , y):                                       # --- --- FUNCTION RETURNE param (x , y) VERIFIE LIMITE MATRICE  
@@ -35,7 +41,7 @@ class MazeBacktracking():
         return liNeighbors                                         # --- liste melangée retourné
         
     def backtrackingRecursive(self, x ,y):                         # --- --- FUNCTION RECURSIVE
-        
+        self.ver[0][0] = "#.."
         # print(self.grid)                                           # --- ZONE DE TEST --- #
         #                                                            # --- pour voir l'avancée de l'algo dans la matrice                                            
         # input("continue")                                          # --- ZONE DE TEST --- #
@@ -50,19 +56,21 @@ class MazeBacktracking():
             #print(pos)                                            # --- En dépillant il retourne des nouvelles cellules inconnues 
         return x , y                                               # --- RETURNE POSITION DÉPART
          
-    def checkFill(self, x, y):
-        if self.grid[x][y] ==0:
-            return True
-        else: return False
-        
-    
-    def printMaze(self):
+    def printMaze(self):                                           # --- --- FUNCTION DRAW THE  MAZE IN A STRING
         s = ""
         for (a, b) in zip(self.hor, self.ver):
             s += ''.join(a + ['\n'] + b + ['\n'])
         return s
-    
+
+"""
+Class SolveMazeBacktracking
+resoud un labyrinthe avec l'algorithme backtracking o pour le chemin * pour les impasses
+"""    
+class SolveMazeBacktracking():
+    def __init__(self, mazeString):
+        
+        print(mazeString)
     
 M1 = MazeBacktracking()
-s = M1.printMaze()
-print(s)
+maze = M1.printMaze()
+S1 = SolveMazeBacktracking(maze)
