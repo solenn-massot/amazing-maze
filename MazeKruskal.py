@@ -1,6 +1,10 @@
 import random
 import numpy as np
 
+"""
+Class MazeKruskal
+genere un labyrinthe avec l'algorithme de kruskal
+"""
 class MazeKruskal():
     def __init__(self):                                     # --- --- CONSTRUCTEUR attribut : size maze , direction, matrice, edge, generateMaze
         
@@ -10,7 +14,8 @@ class MazeKruskal():
         self.maze = np.zeros((self.size*2-1, self.size*2-1), dtype=int) # --- Matrice de modelisation du maze
         self.edge =  self.setIdMatrix()                                 # --- Rentrer edge via ID
         self.path = self.generateKruskalMaze()                          # --- Generate backtracking recursive
-        
+        self.print = self.printMaze()
+
     def isLimit(self, x , y):                               # --- --- FUNCTION RETURNE param (x , y) VERIFIE LIMITE MATRICE  
 
         if 0 <= x < self.size and 0 <= y < self.size:              # --- limite Board
@@ -106,22 +111,58 @@ class MazeKruskal():
 
     def printMaze(self):                                    # --- --- FUNCTION make a maze in string
         maze = ''
-        wall = "##"
-        path = ".."
+        wall = "#"
+        path = "."
         br = "\n"
-        maze += wall + path + (wall * len(self.maze)) + br
+        # maze += wall*2 + (wall * len(self.maze)) + br
         for x in range(len(self.maze)):
-            maze += wall
+            # maze += wall
             for y in range(len(self.maze)):
                 if self.maze[x][y] == 0:
                     maze += wall
                 else:
                     maze += path
-            maze += wall + br
-        maze += wall * len(self.maze) + path + wall
+            maze += br
+        # maze += wall * len(self.maze) + wall*2
+        print("Labyrinthe génerée ")
+        print("\n")
+        print(maze)
         return maze
     
-    
-M1 = MazeKruskal()
-maze = M1.printMaze()
-print(maze)
+
+"""
+Class SolveMazeAlgoAStar
+resoud un labyrinthe avec l'algorithme A*
+"""
+class SolveMazeAlgoAStar(MazeKruskal):
+    def __init__(self):
+        super().__init__()
+        self.maze = np.zeros((self.size*2-1, self.size*2-1), dtype=int)
+        self.start = (0, 0)
+        self.end = (-1, -1)
+        self.fillMaze = self.solveMazeAlgoAStar()
+
+    def fillMatrice(self):
+        listChar = []
+        for char in self.print:
+            if char == "\n": continue
+            listChar.append(char)
+        
+        i = 0
+        for x in range(len(self.maze)):
+            for y in range(len(self.maze)):
+                if listChar[i] == '#': self.maze[x][y] = 1
+                i += 1
+
+    def distManathan(self):
+        return len(self.maze) * 2 -1
+
+    def solveMazeAlgoAStar(self):
+        self.fillMatrice()
+        dist = self.distManathan()
+        # self.maze[self.start[0]][self.start[1]] = 2
+        # self.maze[self.end[0]][self.end[1]] = 2
+        print(dist)
+        print(self.maze)
+
+S1 = SolveMazeAlgoAStar()
