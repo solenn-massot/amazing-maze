@@ -164,5 +164,9 @@ class SolveMazeAlgoAStar(MazeKruskal):
         # self.maze[self.end[0]][self.end[1]] = 2
         print(dist)
         print(self.maze)
+        #A*
+        # f = g + h
+        # g : la distance du noeud de depart soit 0 au depart
+        # h : est la distance heuristique ici on utilise la distance de manhnattan
 
 S1 = SolveMazeAlgoAStar()
