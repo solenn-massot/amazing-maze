@@ -57,7 +57,7 @@ class Maze(Cell):
         current_cell.break_walls(next_cell, wall)
         position = next_cell.position
         
-        carve_passage(self, position)
+        self.carve_passage(self, position)
 
         # current_cell = self.get_cell(self.entrance)
         # stack = []
