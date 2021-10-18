@@ -39,17 +39,17 @@ class Maze:
         return
 
 
-    def __str__(self):
-        string = ""
-        conv = {
-                True: "██",
-                False: "  "
-            }
-        for y in range(self.height):
-            for x in range(self.width):
-                string += conv[self.cells[y][x]]
-                string += "\n"
-        return string
+    # def __str__(self):
+    #     string = ""
+    #     conv = {
+    #             True: "██",
+    #             False: "  "
+    #         }
+    #     for y in range(self.height):
+    #         for x in range(self.width):
+    #             string += conv[self.cells[y][x]]
+    #             string += "\n"
+    #     return string
 
-maze = Maze.create_maze(1,1)
-print(maze)
+# maze = Maze.create_maze(1,1)
+# print(maze)
